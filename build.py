@@ -7,24 +7,32 @@ def install(package):
 install('pandas')
 install('bs4')
 
+import requests
 import pandas as pd
 import zipfile
 from bs4 import BeautifulSoup
 
-url = '''https://glossaries.dila.edu.tw/data/mahavyutpatti.dila.tei.p5.xml.zip'''
+url = 'https://glossaries.dila.edu.tw/data/mahavyutpatti.dila.tei.p5.xml.zip'
 
-with zipfile.ZipFile(url, 'r') as zip_ref:
-    zip_ref.extractall(data)
+import time
+year = str(time.gmtime().tm_year)
+month = str(time.gmtime().tm_mon)
+day = str(time.gmtime().tm_mday)
 
-with open('data/mahavyutpatti.dila.tei.p5.xml', 'r') as f:
+date = day + '/' + month '/' + year
+
+def download_url(url=url, data='data/Mahavyutpatti_' + date + '.xml', chunk_size=128):
+    r = requests.get(url, stream=True)
+    with open(data/, 'wb') as fd:
+        for chunk in r.iter_content(chunk_size=128):
+            fd.write(chunk)
+
+with open('data/Mahavyutpatti_' + date + '.xml', 'r') as f:
     data = f.read()
-print("1")
 bs_data = BeautifulSoup(data, "xml")
-print("2")
 data = bs_data.find_all('entry')
 
 out = {}
-print("3")
 for i in range(len(data)):
 
     skt_str = data[i].find('orth', {'xml:lang':'san-Latn'}).text
