@@ -23,7 +23,7 @@ date = day + '/' + month + '/' + year
 
 def download_url(url=url, data='data/Mahavyutpatti_' + date + '.zip', chunk_size=128):
     r = requests.get(url, stream=True)
-    with open(data/, 'wb') as fd:
+    with open('data/', 'wb') as fd:
         for chunk in r.iter_content(chunk_size=128):
             fd.write(chunk)
 
