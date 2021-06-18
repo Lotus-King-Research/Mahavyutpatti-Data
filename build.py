@@ -6,6 +6,7 @@ def install(package):
     
 install('pandas')
 install('bs4')
+install('requests')
 
 import time
 import requests
