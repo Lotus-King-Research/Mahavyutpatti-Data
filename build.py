@@ -19,7 +19,7 @@ year = str(time.gmtime().tm_year)
 month = str(time.gmtime().tm_mon)
 day = str(time.gmtime().tm_mday)
 
-date = day + '/' + month '/' + year
+date = day + '/' + month + '/' + year
 
 def download_url(url=url, data='data/Mahavyutpatti_' + date + '.zip', chunk_size=128):
     r = requests.get(url, stream=True)
