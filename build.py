@@ -1,10 +1,11 @@
+import pandas as pd
 import zipfile
 from bs4 import BeautifulSoup
+
 url = '''https://glossaries.dila.edu.tw/data/mahavyutpatti.dila.tei.p5.xml.zip'''
+
 with zipfile.ZipFile(url, 'r') as zip_ref:
     zip_ref.extractall(data)
-
-import pandas as pd
 
 with open('data/mahavyutpatti.dila.tei.p5.xml', 'r') as f:
     data = f.read()
@@ -28,4 +29,4 @@ out.columns = ['Tibetan-Word', 'Sanskrit-Word']
 out['Tibetan-Word'] = out['Tibetan-Word'].str.strip()
 out['Sanskrit-Word'] = out['Sanskrit-Word'].str.strip()
 
-return out
+out.to_csv('data/Mahavyutpatti')
