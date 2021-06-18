@@ -7,6 +7,7 @@ def install(package):
 install('pandas')
 install('bs4')
 
+import time
 import requests
 import pandas as pd
 import zipfile
@@ -14,19 +15,21 @@ from bs4 import BeautifulSoup
 
 url = 'https://glossaries.dila.edu.tw/data/mahavyutpatti.dila.tei.p5.xml.zip'
 
-import time
 year = str(time.gmtime().tm_year)
 month = str(time.gmtime().tm_mon)
 day = str(time.gmtime().tm_mday)
 
 date = day + '/' + month '/' + year
 
-def download_url(url=url, data='data/Mahavyutpatti_' + date + '.xml', chunk_size=128):
+def download_url(url=url, data='data/Mahavyutpatti_' + date + '.zip', chunk_size=128):
     r = requests.get(url, stream=True)
     with open(data/, 'wb') as fd:
         for chunk in r.iter_content(chunk_size=128):
             fd.write(chunk)
 
+with ZipFile('data/Mahavyutpatti_' + date + '.zip') as zip:
+    zip.extractall()
+    
 with open('data/Mahavyutpatti_' + date + '.xml', 'r') as f:
     data = f.read()
 bs_data = BeautifulSoup(data, "xml")
