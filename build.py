@@ -28,7 +28,7 @@ def download_url(url=url, data='data/Mahavyutpatti_' + date + '.zip', chunk_size
         for chunk in r.iter_content(chunk_size=128):
             fd.write(chunk)
 
-with ZipFile('data/Mahavyutpatti_' + date + '.zip') as zip:
+with zipfile.ZipFile('data/Mahavyutpatti_' + date + '.zip') as zip:
     zip.extractall()
     
 with open('data/Mahavyutpatti_' + date + '.xml', 'r') as f:
