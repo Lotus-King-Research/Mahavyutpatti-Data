@@ -5,7 +5,7 @@ def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
     
 install('pandas')
-install('BeautifulSoup')
+install('bs4')
 
 import pandas as pd
 import zipfile
