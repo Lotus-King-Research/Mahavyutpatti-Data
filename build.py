@@ -10,6 +10,7 @@ subprocess.run(["wget", "--no-check-certificate", "http://glossaries.dila.edu.tw
 install('pandas')
 install('bs4')
 install('requests')
+install('lxml')
 
 import time
 import requests
