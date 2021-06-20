@@ -3,7 +3,10 @@ import sys
 
 def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-    
+
+url = 'http://glossaries.dila.edu.tw/data/mahavyutpatti.dila.tei.p5.xml.zip'
+subprocess.run(["wget", "--no-check-certificate", "http://glossaries.dila.edu.tw/data/mahavyutpatti.dila.tei.p5.xml.zip"])
+
 install('pandas')
 install('bs4')
 install('requests')
@@ -14,18 +17,16 @@ import pandas as pd
 import zipfile
 from bs4 import BeautifulSoup
 
-url = 'http://glossaries.dila.edu.tw/data/mahavyutpatti.dila.tei.p5.xml.zip'
-
 #year = str(time.gmtime().tm_year)
 #month = str(time.gmtime().tm_mon)
 #day = str(time.gmtime().tm_mday)
 #date = day + '/' + month + '/' + year
 
-r = requests.get(url, allow_redirects=True, verify=False)
+#r = requests.get(url, allow_redirects=True, verify=False)
 
-open('Mahavyutpatti.zip', 'wb').write(r.content)
+#open('Mahavyutpatti.zip', 'wb').write(r.content)
 
-with zipfile.ZipFile('Mahavyutpatti.zip') as zip:
+with zipfile.ZipFile('mahavyutpatti.dila.tei.p5.xml.zip') as zip:
     zip.extractall()
     
 with open('mahavyutpatti.dila.tei.p5.xml', 'r') as f:
