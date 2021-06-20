@@ -14,24 +14,21 @@ import pandas as pd
 import zipfile
 from bs4 import BeautifulSoup
 
-url = 'https://glossaries.dila.edu.tw/data/mahavyutpatti.dila.tei.p5.xml.zip'
+url = 'http://glossaries.dila.edu.tw/data/mahavyutpatti.dila.tei.p5.xml.zip'
 
-year = str(time.gmtime().tm_year)
-month = str(time.gmtime().tm_mon)
-day = str(time.gmtime().tm_mday)
+#year = str(time.gmtime().tm_year)
+#month = str(time.gmtime().tm_mon)
+#day = str(time.gmtime().tm_mday)
+#date = day + '/' + month + '/' + year
 
-date = day + '/' + month + '/' + year
+r = requests.get(url, allow_redirects=True)
 
-def download_url(url=url, data='~/Mahavyutpatti.zip', chunk_size=128):
-    r = requests.get(url, stream=True)
-    with open('data/', 'wb') as fd:
-        for chunk in r.iter_content(chunk_size=128):
-            fd.write(chunk)
+open('Mahavyutpatti.zip', 'wb').write(r.content)
 
-with zipfile.ZipFile('~/Mahavyutpatti.zip') as zip:
+with zipfile.ZipFile('Mahavyutpatti.zip') as zip:
     zip.extractall()
     
-with open('~/Mahavyutpatti.zip', 'r') as f:
+with open('Mahavyutpatti.xml', 'r') as f:
     data = f.read()
 bs_data = BeautifulSoup(data, "xml")
 data = bs_data.find_all('entry')
