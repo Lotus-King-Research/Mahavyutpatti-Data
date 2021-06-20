@@ -22,16 +22,16 @@ day = str(time.gmtime().tm_mday)
 
 date = day + '/' + month + '/' + year
 
-def download_url(url=url, data='data/Mahavyutpatti_' + date + '.zip', chunk_size=128):
+def download_url(url=url, data='~/Mahavyutpatti.zip', chunk_size=128):
     r = requests.get(url, stream=True)
     with open('data/', 'wb') as fd:
         for chunk in r.iter_content(chunk_size=128):
             fd.write(chunk)
 
-with zipfile.ZipFile('data/Mahavyutpatti_' + date + '.zip') as zip:
+with zipfile.ZipFile('~/Mahavyutpatti.zip') as zip:
     zip.extractall()
     
-with open('data/Mahavyutpatti_' + date + '.xml', 'r') as f:
+with open('~/Mahavyutpatti.zip', 'r') as f:
     data = f.read()
 bs_data = BeautifulSoup(data, "xml")
 data = bs_data.find_all('entry')
