@@ -21,14 +21,14 @@ url = 'http://glossaries.dila.edu.tw/data/mahavyutpatti.dila.tei.p5.xml.zip'
 #day = str(time.gmtime().tm_mday)
 #date = day + '/' + month + '/' + year
 
-r = requests.get(url, allow_redirects=True)
+r = requests.get(url, allow_redirects=True, verify=False)
 
 open('Mahavyutpatti.zip', 'wb').write(r.content)
 
 with zipfile.ZipFile('Mahavyutpatti.zip') as zip:
     zip.extractall()
     
-with open('Mahavyutpatti.xml', 'r') as f:
+with open('mahavyutpatti.dila.tei.p5.xml', 'r') as f:
     data = f.read()
 bs_data = BeautifulSoup(data, "xml")
 data = bs_data.find_all('entry')
