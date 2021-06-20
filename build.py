@@ -1,10 +1,16 @@
+'''
+This build process downloads a file,
+parses the xml contained in the file,
+process it to a Pandas dataframe,
+and then save the dataframe to a csv.
+'''
+
 import subprocess
 import sys
 
 def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
-url = 'http://glossaries.dila.edu.tw/data/mahavyutpatti.dila.tei.p5.xml.zip'
 subprocess.run(["wget", "--no-check-certificate", "http://glossaries.dila.edu.tw/data/mahavyutpatti.dila.tei.p5.xml.zip"])
 
 install('pandas')
@@ -26,6 +32,9 @@ from bs4 import BeautifulSoup
 #r = requests.get(url, allow_redirects=True, verify=False)
 
 #open('Mahavyutpatti.zip', 'wb').write(r.content)
+
+subprocess.run(["ls", "-lhtr", "."])
+subprocess.run(["ls", "-lhtr", "/tmp"])
 
 with zipfile.ZipFile('mahavyutpatti.dila.tei.p5.xml.zip') as zip:
     zip.extractall()
@@ -49,4 +58,4 @@ out.columns = ['Tibetan-Word', 'Sanskrit-Word']
 out['Tibetan-Word'] = out['Tibetan-Word'].str.strip()
 out['Sanskrit-Word'] = out['Sanskrit-Word'].str.strip()
 
-out.to_csv('data/Mahavyutpatti')
+out.to_csv('data/Mahavyutpatti.csv')
