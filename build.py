@@ -33,9 +33,6 @@ from bs4 import BeautifulSoup
 
 #open('Mahavyutpatti.zip', 'wb').write(r.content)
 
-subprocess.run(["ls", "-lhtr", "."])
-subprocess.run(["ls", "-lhtr", "/tmp"])
-
 with zipfile.ZipFile('mahavyutpatti.dila.tei.p5.xml.zip') as zip:
     zip.extractall()
     
